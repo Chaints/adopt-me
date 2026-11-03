@@ -1,0 +1,562 @@
+/* ==========================================================================
+   adopt.mart — komponen marketplace (di atas tokens.css + site.css)
+   ========================================================================== */
+
+/* Kotak cari + baris kepercayaan (dipakai di hero beranda, tata letak hero ada di blok HERO BERANDA paling bawah) */
+.msearch {
+  display: flex; gap: .5rem; margin-top: 2rem; max-width: 640px;
+  padding: .5rem; background: var(--paper); border-radius: var(--r-pill);
+  box-shadow: var(--shadow-card);
+}
+.msearch .input { border: 0; min-height: 52px; flex: 1; }
+.msearch .input:focus-within { box-shadow: none; }
+.msearch .input { min-width: 0; }
+.msearch .btn { flex: none; padding-inline: 1.2rem; }
+.mtrust { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; margin-top: 1.5rem; font-size: var(--text-sm); color: var(--pine-soft); }
+.mtrust span { display: inline-flex; align-items: center; gap: .45rem; }
+.mtrust span::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--glacier-deep); }
+
+/* Kategori — gaya stiker: garis tebal, bayangan keras, miring tipis, ketuk = "kepencet" ---- */
+.sec-cat { padding-top: clamp(1.75rem, 3vw, 2.5rem); padding-bottom: 0; }
+.sec-cat + .section { padding-top: clamp(2rem, 4vw, 3rem); }
+.shead--split { grid-template-columns: minmax(0, 1fr) auto; gap: 1rem 2rem; margin-bottom: 1.25rem; }  /* judul + link tetap sebaris di HP */
+.catgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; padding: .3rem .4rem .7rem; }
+@media (max-width: 900px) { .catgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cat {
+  --bg: var(--glacier-deep);
+  position: relative; display: flex; flex-direction: column; min-height: 150px; padding: .9rem 1rem 1rem;
+  background: var(--bg); border: 2.5px solid var(--edge); border-radius: 22px; box-shadow: 5px 5px 0 var(--sh);
+  transform: rotate(-1.2deg);
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.cat:nth-child(even) { transform: rotate(1.2deg); }
+.cat:nth-child(1) { --bg: #FF9CCB; }   /* pet: pink */
+.cat:nth-child(2) { --bg: #8FD3FF; }   /* item: biru langit */
+.cat:nth-child(3) { --bg: #FFE08A; }   /* akun: kuning mentega */
+.cat:nth-child(4) { --bg: #D9C4FF; }   /* lainnya: ungu muda */
+.cat:hover, .cat:active { transform: translate(3px, 3px) rotate(0deg); box-shadow: 2px 2px 0 var(--sh); }
+.cat__ico { position: absolute; top: .55rem; right: .65rem; width: 52px; height: 52px; color: var(--pine); }
+.cat__count {
+  order: 1; align-self: flex-start; padding: .12rem .6rem; background: #fff; border: 2px solid var(--edge);
+  border-radius: var(--r-pill); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--pine);
+}
+.cat__name { order: 2; margin-top: auto; padding-top: 1.4rem; font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; line-height: 1.05; letter-spacing: -.03em; color: var(--pine); }
+.cat__desc { order: 3; margin-top: .25rem; font-size: var(--text-sm); color: var(--pine-soft); }
+
+/* Kartu item (pakai dasar .tcard dari site.css) --------------------------- */
+.art { position: absolute; inset: 0; }
+.art svg { width: 100%; height: 100%; }
+.tcard__media--art { background: var(--fog-deep); }
+.tcard__seller { font-size: var(--text-sm); color: var(--pine-mute); }
+.tcard__stock { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--pine-mute); }
+.tcard__stock--low { color: var(--warn-low); }
+
+/* Cara belanja ------------------------------------------------------------ */
+.steps3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; counter-reset: s; }
+@media (max-width: 800px) { .steps3 { grid-template-columns: minmax(0, 1fr); } }
+.step3 { position: relative; padding: 1.6rem; background: var(--paper); border-radius: var(--r-lg); counter-increment: s; }
+.step3::before {
+  content: counter(s); display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 1rem;
+  border-radius: 50%; background: var(--pine); color: var(--on-pine); font-family: var(--font-mono);
+}
+.step3 h3 { font-size: var(--text-lg); margin-bottom: .4rem; }
+/* Latar pola biru di section "Cara belanja" (gambar: assets/img/pola-biru.jpg) */
+.stepsbg {
+  padding: clamp(1.25rem, 3vw, 2.5rem); border-radius: var(--r-lg);
+  background: #0fb9ff url("../img/pola-biru.jpg") center / cover no-repeat;
+}
+.stepsbg .shead { margin-bottom: 1.25rem; }
+.stepsbg .label, .stepsbg .shead h2 { color: var(--pine); }
+
+/* Ajakan jadi penjual ----------------------------------------------------- */
+.sellcta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem;
+  padding: clamp(1.75rem, 4vw, 3.25rem); background: var(--pine-night); color: rgba(255,255,255,.78); border-radius: var(--r-lg);
+}
+.sellcta h2 { color: var(--snow); font-size: var(--text-xl); max-width: 22ch; }
+.sellcta p { margin-top: .6rem; max-width: 46ch; }
+
+/* Detail item ------------------------------------------------------------- */
+.crumbs { padding-top: 1.5rem; font-size: var(--text-sm); color: var(--pine-mute); }
+.crumbs a { text-decoration: underline; text-underline-offset: 3px; }
+.idetail { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); padding-block: 1.5rem clamp(3rem, 5vw, 5rem); align-items: start; }
+@media (max-width: 900px) { .idetail { grid-template-columns: minmax(0, 1fr); } }
+.idetail__art { position: relative; aspect-ratio: 4 / 3; border-radius: var(--r-lg); overflow: hidden; }
+.idetail h1 { font-size: var(--text-2xl); max-width: 18ch; margin-top: .6rem; }
+.idetail__price { margin-top: 1rem; font-family: var(--font-display); font-size: var(--text-xl); color: var(--pine); letter-spacing: -.02em; }
+.idetail__desc { margin-top: 1rem; color: var(--pine-soft); }
+.buybox { margin-top: 1.5rem; display: grid; gap: 1rem; padding: 1.25rem; background: var(--paper); border-radius: var(--r-lg); }
+.qty { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: var(--text-sm); color: var(--pine); }
+.qty__ctrl { display: inline-flex; align-items: center; gap: .25rem; padding: .25rem; border: 1px solid var(--line); border-radius: var(--r-pill); }
+.qty__ctrl button { width: 38px; height: 38px; border-radius: 50%; border: 0; background: var(--fog); font-size: 1.2rem; line-height: 1; }
+.qty__ctrl button:hover { background: var(--glacier); }
+.qty__ctrl output { min-width: 3ch; text-align: center; font-family: var(--font-mono); }
+.total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 1rem; border-top: 1px solid var(--fog-deep); }
+.total strong { font-family: var(--font-display); font-size: var(--text-lg); color: var(--pine); }
+.sellerbox { display: flex; align-items: center; gap: .9rem; margin-top: 1rem; padding: 1rem 1.25rem; background: var(--glacier-hi); border-radius: var(--r-md); }
+.sellerbox__av { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--pine); color: var(--snow); font-family: var(--font-display); font-weight: 600; }
+.sellerbox small { display: block; color: var(--pine-mute); }
+.note { margin-top: 1rem; padding: 1rem 1.25rem; border-radius: var(--r-md); border: 1px dashed var(--line); font-size: var(--text-sm); color: var(--pine-soft); }
+.related { padding-bottom: clamp(3rem, 5vw, 5rem); }
+
+/* Toolbar, filter, state kosong (diambil dari pages.css template) ------- */
+.toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem;
+  padding: 1rem; margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--paper); border-radius: var(--r-lg);
+}
+.toolbar__right { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+.range { display: flex; align-items: center; gap: .75rem; font-size: var(--text-sm); color: var(--pine); }
+.range input { width: 160px; accent-color: var(--pine); }
+.range output { min-width: 5ch; font-family: var(--font-mono); }
+.sort { min-height: 42px; padding: 0 2.2rem 0 1rem; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--paper); font-size: var(--text-sm); }
+.results-meta { margin-bottom: 1rem; font-family: var(--font-mono); font-size: var(--text-sm); color: var(--pine-mute); }
+.empty { display: grid; justify-items: center; gap: 1rem; padding: 4rem 1rem; text-align: center; background: var(--paper); border-radius: var(--r-lg); }
+.empty[hidden] { display: none; }
+.empty h2 { font-size: var(--text-xl); }
+.tcard[hidden] { display: none; }
+
+/* Layar HP: kecilin semua ukuran (semua ukuran pakai rem, jadi ikut mengecil) */
+@media (max-width: 640px) {
+  html { font-size: 13.5px; }
+  .brand__word { font-size: 1.35rem; }
+}
+
+/* ==========================================================================
+   TEMA PINK + BIRU LANGIT (disesuaikan dengan gambar hero)
+   Mau ganti warna lagi? Cukup ubah angka warna di blok ini.
+   ========================================================================== */
+:root {
+  --fog:        #FFF6FA;   /* latar halaman: putih keunguan tipis */
+  --fog-deep:   #F7E4EE;
+  --line:       #EFD3E1;
+  --pine:       #2D1B45;   /* teks judul: ungu tua */
+  --pine-soft:  #4D3A66;
+  --pine-mute:  #7A6A92;
+  --pine-night: #2D1B45;   /* footer */
+  --glacier:      #CDE7FB; /* biru langit */
+  --glacier-hi:   #E3F2FD;
+  --glacier-deep: #9FCFF3;
+  --pink:       #F0368E;   /* warna utama (tombol, pilihan aktif) */
+  --pink-deep:  #D01F75;
+  --on-pine:    #FFFFFF;   /* teks di atas latar --pine (kebalik di tema gelap) */
+  --warn-bg:    #FFF1B8;   /* kotak alert high tier */
+  --warn-low:   #9A4B00;   /* tulisan stok menipis */
+  --hdr-bg:     rgba(255, 246, 250, .92);
+  --glass:      rgba(255, 255, 255, .9);
+  --sh:         #2D1B45;   /* warna bayangan keras kartu stiker */
+  --edge:       #2D1B45;   /* warna garis pinggir kartu stiker (BUKAN warna teks) */
+}
+.btn--dark { background: var(--pink); color: #fff; }
+.btn--dark:hover { background: var(--pink-deep); }
+.chip[aria-pressed="true"] { background: var(--pink); border-color: var(--pink); }
+.chip:hover { border-color: var(--pink); }
+.step3::before { background: var(--pink); }
+.tcard:hover .tcard__go { background: var(--pink); }
+.mhero__card .mtrust span::before { background: var(--pink); }
+.mtrust span::before { background: var(--pink); }
+.range input { accent-color: var(--pink); }
+.header[data-header="solid"] { background: var(--hdr-bg); }
+.header[data-header="solid"] .header__signin:hover { background: var(--pink); border-color: var(--pink); }
+.sellerbox__av { background: var(--pink); }
+.sellcta { background: var(--pine-night); }
+.footer__word { color: #3A2757; }
+.input:focus-within { box-shadow: 0 0 0 3px var(--glacier); border-color: var(--pink); }
+:focus-visible { outline-color: var(--pink); }
+
+/* ==========================================================================
+   HEADER DIKECILIN
+   Tinggi header ada di --hh (dipakai buat ngitung tinggi hero). Kalau header diubah ukurannya, ukur ulang & update --hh.
+   ========================================================================== */
+:root { --hh: 63px; }
+@media (max-width: 760px) { :root { --hh: 56px; } }
+.header { padding-block: .65rem; }
+.brand__mark { width: 24px; height: 24px; }
+.brand__word { font-size: 1.25rem; }
+.nav a { font-size: var(--text-base); }
+.header__signin { min-height: 38px; padding-inline: 1.2rem; font-size: var(--text-sm); }
+.burger { width: 38px; height: 38px; }
+.burger span { left: 10px; right: 10px; }
+.burger span:first-child { top: 14px; }
+.burger span:last-child  { top: 22px; }
+.menu-open .burger span:first-child, .menu-open .burger span:last-child { top: 18px; }
+
+/* ==========================================================================
+   HERO BERANDA — satu blok bersih (dulu numpuk 8 blok timpa-menimpa).
+   Satu layar penuh, tinggi = layar dikurangi tinggi header (--hh, lihat blok di atas).
+   Layout DESKTOP (layar lebar, landscape, min 761px) -> assets/img/hero.jpg (16:9), kotak teks di kanan-bawah
+   Layout HP (layar tegak / portrait, atau lebar maks 760px) -> assets/img/hero-hp.jpg (9:16), kotak teks di dasar
+   Mau ngubah hero? Ubah DI SINI aja, jangan nambah blok timpaan baru.
+   ========================================================================== */
+.mhero { display: block; max-width: none; margin: 0; padding: 0; }
+.mhero__pic { display: none; }                      /* elemen lama di index.html, nggak dipakai lagi */
+.mhero .label, .mhero p.lead { display: none; }     /* teks kecil & paragraf nggak ditampilkan di hero */
+
+.mhero__card {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: row; align-items: flex-end; justify-content: flex-end;
+  width: 100%; min-height: 460px; padding: 1.25rem 1.5rem;
+  height: calc(100vh - var(--hh)); height: calc(100svh - var(--hh));
+  background: #cfe6f7 url("../img/hero.jpg") 70% 30% / cover no-repeat;
+}
+.mhero__text {
+  width: min(47%, 580px); padding: 1.1rem 1.3rem;
+  background: var(--glass); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-radius: var(--r-md); color: var(--pine-soft);
+}
+.mhero h1 { color: var(--pine); max-width: none; white-space: nowrap; font-size: clamp(1.5rem, 1rem + 1.4vw, 2.1rem); }
+.mhero .msearch { margin-top: .7rem; box-shadow: none; border: 1px solid var(--line); }
+.mhero .mtrust { margin-top: .7rem; flex-wrap: nowrap; gap: .5rem 1rem; font-size: .8rem; white-space: nowrap; }
+
+@media (max-width: 760px), (orientation: portrait) {
+  .mhero__card {
+    flex-direction: column; justify-content: flex-end; align-items: stretch;
+    padding: .75rem .75rem 4rem;                    /* bawah 4rem: kotak teks naik dari dasar layar */
+    background-image: url("../img/hero-hp.jpg"); background-position: center top;
+  }
+  .mhero__text { flex: none; width: 100%; padding: .9rem 1rem; }
+  .mhero h1 { font-size: 1.5rem; white-space: normal; }
+  .mhero .mtrust { display: none; }                 /* baris "Bayar QRIS..." disembunyiin di HP */
+}
+
+
+/* ==========================================================================
+   KATALOG ALA SHOPEE (blok paling bawah = yang berlaku)
+   Kartu item dibikin ringkas: gambar kotak, nama max 2 baris, harga tebal pink.
+   HP 2 kolom, tablet 3 kolom, desktop 4 kolom. Berlaku di beranda, daftar item,
+   dan "Item serupa" (semuanya pakai .tgrid).
+   ========================================================================== */
+.tgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.3rem; }
+@media (max-width: 1024px) { .tgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; } }
+@media (max-width: 640px)  { .tgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .95rem; } }
+
+.tcard__media { margin: 0; border-radius: 0; aspect-ratio: 1 / 1; }
+.tcard__kind { top: .5rem; left: .5rem; padding: .2rem .55rem; }
+.tcard__body { gap: .3rem; padding: .65rem .75rem .8rem; }
+.tcard__name { font-size: var(--text-base); line-height: 1.3; font-weight: 500;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tcard__stock { font-size: var(--text-xs); }
+.tcard__foot { margin-top: 0; padding-top: 0; border-top: 0; }
+.tcard__price { font-size: var(--text-lg); font-weight: 700; color: var(--pink-deep); }
+.tcard__go { display: none; }
+.tcard__seller { font-size: var(--text-xs); }
+.tcard__facts { gap: .1rem .6rem; font-size: var(--text-xs); }
+.tcard__shop { color: var(--pink-deep); font-weight: 600; }
+@media (max-width: 640px) {
+  .tcard__body { padding: .5rem .55rem .65rem; }
+  .tcard__name { font-size: var(--text-sm); }
+  .tcard__price { font-size: var(--text-base); }
+}
+
+/* ==========================================================================
+   PILIH PENJUAL (halaman detail): satu produk, banyak penawaran penjual
+   ========================================================================== */
+.offers__title { margin-top: 1.25rem; }
+.offers { display: grid; gap: .5rem; margin-top: .5rem; }
+.offer {
+  display: flex; align-items: center; gap: .8rem; width: 100%; text-align: left;
+  padding: .7rem .9rem; background: var(--paper); border: 1.5px solid var(--fog-deep);
+  border-radius: var(--r-md); cursor: pointer; font: inherit; color: var(--pine);
+}
+.offer[aria-pressed="true"] { border-color: var(--pink); background: var(--glacier-hi); }
+.offer:disabled { opacity: .5; cursor: not-allowed; }
+.offer .sellerbox__av { width: 38px; height: 38px; flex: none; }
+.offer__info { flex: 1; min-width: 0; display: grid; gap: .1rem; }
+.offer__info small { color: var(--pine-mute); font-size: var(--text-xs); }
+.offer__price { font-weight: 700; color: var(--pink-deep); white-space: nowrap; }
+
+/* ==========================================================================
+   CARA BAYAR, PESANAN (REKBER), CHAT PER ORDER  (tampilan contoh, belum ada backend)
+   ========================================================================== */
+.paymode { display: grid; gap: .5rem; margin-top: .5rem; }
+.paymode__opt {
+  text-align: left; display: grid; gap: .1rem; padding: .7rem .9rem; background: var(--paper);
+  border: 1.5px solid var(--fog-deep); border-radius: var(--r-md); cursor: pointer; font: inherit; color: var(--pine);
+}
+.paymode__opt small { color: var(--pine-mute); font-size: var(--text-xs); }
+.paymode__opt[aria-pressed="true"] { border-color: var(--pink); background: var(--glacier-hi); }
+
+.order { display: grid; gap: 1.25rem; padding-block: 1rem clamp(3rem, 5vw, 5rem); }
+@media (min-width: 900px) { .order { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+.order__col { display: grid; gap: 1rem; min-width: 0; }
+.ocard { display: grid; gap: .7rem; padding: 1rem 1.1rem; background: var(--paper); border-radius: var(--r-lg); }
+.ocard h3 { font-size: var(--text-lg); }
+.osum { display: flex; gap: .9rem; align-items: center; }
+.osum__art { position: relative; flex: none; width: 64px; height: 64px; border-radius: var(--r-md); overflow: hidden; }
+.osum__info { min-width: 0; display: grid; gap: .15rem; }
+.osum__info small { color: var(--pine-mute); }
+.osum__row { display: flex; justify-content: space-between; gap: 1rem; padding-top: .8rem; border-top: 1px solid var(--fog-deep); }
+.steps5 { display: grid; gap: .55rem; list-style: none; padding: 0; margin: 0; }
+.steps5 li { display: flex; gap: .7rem; align-items: center; font-size: var(--text-sm); color: var(--pine-mute); }
+.steps5 li::before {
+  content: attr(data-n); display: grid; place-items: center; flex: none; width: 26px; height: 26px;
+  border-radius: 50%; border: 1.5px solid var(--fog-deep); font-size: var(--text-xs);
+}
+.steps5 li[data-state="done"] { color: var(--pine); }
+.steps5 li[data-state="done"]::before { content: "✓"; background: var(--pink); border-color: var(--pink); color: #fff; }
+.steps5 li[data-state="now"] { color: var(--pine); font-weight: 600; }
+.steps5 li[data-state="now"]::before { border-color: var(--pink); color: var(--pink-deep); }
+.qrisbox { display: flex; gap: 1rem; align-items: center; }
+.qrisbox__qr {
+  display: grid; place-items: center; flex: none; width: 112px; height: 112px; text-align: center;
+  border: 2px dashed var(--line); border-radius: var(--r-md); color: var(--pine-mute); font-weight: 600;
+}
+.qrisbox__qr--img { display: block; width: 150px; height: 150px; padding: 6px; background: #fff; border: 2px solid var(--line); object-fit: contain; }
+.qrisbox__amt { font-weight: 700; font-size: var(--text-lg); color: var(--pink-deep); }
+.qrisbox__amt small { font-weight: 400; color: var(--pine-mute); }
+.demo { display: grid; gap: .6rem; padding: .9rem 1.1rem; border: 1px dashed var(--line); border-radius: var(--r-md); font-size: var(--text-sm); }
+.demo__row { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+
+.chat { display: grid; grid-template-rows: auto 1fr auto auto; min-width: 0; background: var(--paper); border-radius: var(--r-lg); overflow: hidden; }
+.chat__head { padding: .9rem 1.1rem; border-bottom: 1px solid var(--fog-deep); }
+.chat__head small { display: block; color: var(--pine-mute); }
+.chat__list { display: grid; gap: .5rem; align-content: start; height: 380px; padding: 1rem; overflow-y: auto; }
+.msg { max-width: 82%; padding: .55rem .8rem; border-radius: 14px; font-size: var(--text-sm); line-height: 1.4; overflow-wrap: anywhere; }
+.msg small { display: block; margin-bottom: .1rem; font-size: var(--text-xs); opacity: .7; }
+.msg--s { justify-self: start; background: var(--fog-deep); }
+.msg--b { justify-self: end; background: var(--pink); color: #fff; }
+.msg--a { justify-self: center; max-width: 94%; text-align: center; border: 1px dashed var(--line); color: var(--pine-soft); }
+.chat__in { display: flex; gap: .5rem; padding: .7rem; border-top: 1px solid var(--fog-deep); }
+.chat__in input { flex: 1; min-width: 0; padding: .65rem .95rem; border: 1.5px solid var(--fog-deep); border-radius: var(--r-pill); font: inherit; }
+.chat__safe { padding: .6rem 1.1rem; border-top: 1px solid var(--fog-deep); font-size: var(--text-xs); color: var(--pine-mute); }
+
+/* ==========================================================================
+   GAYA STIKER — SEMUA KARTU (satu tempat, biar seragam)
+   Garis tebal ungu tua + bayangan keras. Kartu item & langkah miring tipis, kartu
+   yang isinya form/chat nggak dimiringin. Ketuk/tekan = kartu "kepencet".
+   Mau ubah tebal garis / bayangan semua kartu? Cukup ubah di blok ini.
+   ========================================================================== */
+.tcard, .step3, .buybox, .ocard, .chat, .toolbar, .empty, .sellerbox, .idetail__art {
+  border: 2.5px solid var(--edge); border-radius: 20px; box-shadow: 4px 4px 0 var(--sh);
+}
+.stepsbg, .mhero__text { border: 2.5px solid var(--edge); box-shadow: 5px 5px 0 var(--sh); }
+.mhero__text { background: var(--paper); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.sellcta { border: 2.5px solid var(--edge); box-shadow: 6px 6px 0 var(--pink); }
+.sellerbox { box-shadow: 3px 3px 0 var(--sh); }
+
+/* kartu item: miring tipis + efek kepencet */
+.tcard { transform: rotate(-.6deg); }
+.tcard:nth-child(even) { transform: rotate(.6deg); }
+.tcard:hover, .tcard:active { transform: translate(3px, 3px) rotate(0deg); box-shadow: 1px 1px 0 var(--sh); }
+.tcard__media { border-bottom: 2.5px solid var(--edge); }
+.tcard__kind { background: var(--paper); border: 2px solid var(--edge); }
+
+/* langkah belanja */
+.step3 { transform: rotate(-.8deg); }
+.step3:nth-child(even) { transform: rotate(.8deg); }
+.step3::before { border: 2px solid var(--edge); }
+
+/* pilihan (penjual, cara bayar): kecil, nggak miring; yang dipilih = pink */
+.offer, .paymode__opt { border: 2px solid var(--edge); box-shadow: 3px 3px 0 var(--sh); }
+.offer[aria-pressed="true"], .paymode__opt[aria-pressed="true"] { border-color: var(--pink); box-shadow: 3px 3px 0 var(--pink); background: var(--glacier-hi); }
+
+/* ==========================================================================
+   MENU HP (burger) — kartu kecil di bawah header (bukan layar penuh)
+   Header pakai blur (backdrop-filter). Efek samping: elemen "fixed" di dalam header
+   (menu .nav) ikut ukuran header, bukan layar. Solusi: blur dimatiin selagi menu kebuka.
+   Jangan dihapus. Posisi kartu pakai --hh (tinggi header).
+   ========================================================================== */
+@media (max-width: 960px) {
+  .menu-open .header { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .nav {
+    inset: calc(var(--hh) + .4rem) .75rem auto .75rem;   /* atas, kanan, bawah, kiri */
+    justify-content: flex-start; align-items: stretch; gap: 0;
+    padding: .35rem 1.25rem 1.25rem;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg);
+    box-shadow: 0 18px 40px rgba(45, 27, 69, .18);
+  }
+  .nav a { padding: .9rem 0; border-bottom: 1px solid var(--fog-deep); font-size: 1.3rem; line-height: 1.2; letter-spacing: -.02em; }
+  .nav .nav__signin-mobile { justify-content: center; margin-top: 1.1rem; padding: .85rem 1.2rem; border-bottom: 0; letter-spacing: 0; }
+}
+
+/* ==========================================================================
+   ANIMASI MASUK — muncul sambil mantul pas halaman dibuka & pas di-scroll
+   Digerakkan assets/js/motion.js (kelas "js" di <html> + kelas "in" per elemen).
+   Pakai properti translate/scale (bukan transform) supaya nggak bentrok sama
+   miring tipis & efek kepencet kartu. Daftar elemen harus sama dengan SEL di motion.js.
+   ========================================================================== */
+@keyframes pop-in {
+  0%   { opacity: 0; translate: 0 42px;  scale: .9; }
+  55%  { opacity: 1; translate: 0 -10px; scale: 1.03; }
+  78%  { opacity: 1; translate: 0 4px;   scale: .99; }
+  100% { opacity: 1; translate: 0 0;     scale: 1; }
+}
+.js :is(.mhero__text, .shead, .cat, .tcard, .stepsbg, .step3, .sellcta, .toolbar, .idetail__art, .buybox, .ocard, .chat):not(.in) { opacity: 0; }
+.js :is(.mhero__text, .shead, .cat, .tcard, .stepsbg, .step3, .sellcta, .toolbar, .idetail__art, .buybox, .ocard, .chat).in { animation: pop-in .85s cubic-bezier(.25, .8, .3, 1) var(--d, 0ms) backwards; }
+.js .mhero__text.in { animation-delay: .3s; }   /* kotak cari di hero muncul sedikit belakangan */
+
+/* ==========================================================================
+   ALERT HIGH TIER (rekber disarankan, total bayar >= window.HIGH_TIER di data.js)
+   ========================================================================== */
+.hialert { margin-top: .75rem; padding: .75rem 1rem; border: 2px solid var(--edge); border-radius: var(--r-md); background: var(--warn-bg); box-shadow: 3px 3px 0 var(--sh); font-size: var(--text-sm); color: var(--pine); }
+.hialert[hidden] { display: none; }
+
+/* ==========================================================================
+   SARAN KOTAK CARI (items.html) + PROFIL PENJUAL (seller.html)
+   ========================================================================== */
+.toolbar { position: relative; z-index: 20; }
+.sugg-wrap { position: relative; flex: 1 1 260px; max-width: 340px; }
+.sugg { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 30; background: var(--paper); border: 2px solid var(--edge); border-radius: var(--r-md); box-shadow: 4px 4px 0 var(--sh); overflow: hidden; }
+.sugg[hidden] { display: none; }
+.sugg__row { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .1rem .65rem; padding: .65rem .9rem; border-bottom: 1px solid var(--line); color: var(--pine); }
+.sugg__row:last-child { border-bottom: 0; }
+.sugg__row:hover, .sugg__row.is-act { background: var(--glacier-hi); }
+.sugg__tag { grid-row: span 2; font-size: var(--text-xs); font-weight: 600; padding: .15rem .55rem; border: 1.5px solid var(--edge); border-radius: 999px; background: var(--glacier); }
+.sugg__tag--s { background: var(--pink); color: var(--snow); }
+.sugg__name { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sugg__row small { color: var(--pine-mute); font-size: var(--text-xs); }
+.sellerlink { margin-top: .6rem; font-size: var(--text-sm); }
+.sellerlink a { text-decoration: underline; text-underline-offset: 3px; color: var(--pine); }
+.sprof { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: 1.25rem; padding: 1.5rem; background: var(--paper); border: 2.5px solid var(--edge); border-radius: var(--r-lg); box-shadow: 6px 6px 0 var(--pink); }
+.sprof__av { display: grid; place-items: center; flex: none; width: 84px; height: 84px; border-radius: 50%; background: var(--pink); color: var(--snow); font-family: var(--font-display); font-size: 2.2rem; font-weight: 600; border: 2.5px solid var(--edge); }
+.sprof__main { flex: 1 1 260px; min-width: 0; }
+.sprof h1 { font-size: var(--text-xl); }
+.sprof__stats { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.sprof__stats span { padding: .25rem .75rem; border: 1.5px solid var(--edge); border-radius: 999px; background: var(--glacier-hi); font-size: var(--text-sm); color: var(--pine); }
+
+/* ==========================================================================
+   TEMA TERANG / GELAP
+   Terang = bawaan (blok TEMA PINK + BIRU LANGIT di atas). Gelap = html[data-theme="dark"].
+   Tombol ganti tema: [data-theme-toggle] di header; pilihan disimpan di localStorage ("am-theme"),
+   kalau belum pernah milih, ikut pengaturan HP. Script kecil di <head> tiap halaman pasang atribut sebelum
+   halaman tampil (biar nggak kedip). Mau ubah warna gelap? Cukup ubah angka di blok ini.
+   ========================================================================== */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --fog:        #1A1126;
+  --paper:      #261A38;
+  --fog-deep:   #33244A;
+  --line:       #4A3866;
+  --pine:       #F4EAFF;   /* teks utama jadi terang */
+  --pine-soft:  #D3C6E8;
+  --pine-mute:  #A898C2;
+  --pine-night: #0E0816;   /* footer & banner tetap gelap */
+  --glacier:      #1E3A56;
+  --glacier-hi:   #263F66;
+  --glacier-deep: #3A678F;
+  --on-pine:    #1A1126;
+  --warn-bg:    #4A3A12;
+  --warn-low:   #FFB74D;
+  --hdr-bg:     rgba(26, 17, 38, .92);
+  --glass:      rgba(38, 26, 56, .92);
+  --sh:         #06020B;   /* bayangan gelap, bukan putih */
+  --edge:       #5B4580;   /* garis pinggir ungu redup, bukan putih */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 48px -18px rgba(0, 0, 0, .7);
+}
+/* kartu kategori tetap pastel, jadi tulisannya tetap ungu tua */
+html[data-theme="dark"] .cat { --pine: #2D1B45; --pine-soft: #4D3A66; --edge: #2D1B45; }
+/* pola biru di "Cara belanja" digelapin biar judulnya kebaca */
+html[data-theme="dark"] .stepsbg { background-image: linear-gradient(rgba(14, 8, 22, .78), rgba(14, 8, 22, .78)), url("../img/pola-biru.jpg"); }
+html[data-theme="dark"] .footer__word { color: #261A38; }
+
+/* tombol ganti tema di header */
+.themebtn { display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--edge); background: transparent; color: var(--pine); cursor: pointer; }
+.themebtn:hover { background: var(--glacier-hi); }
+.themebtn svg { width: 20px; height: 20px; }
+.themebtn__sun { display: none; }
+html[data-theme="dark"] .themebtn__sun { display: block; }
+html[data-theme="dark"] .themebtn__moon { display: none; }
+
+/* Tema gelap: garis & kotak yang tadinya putih diredupin biar nyatu */
+html[data-theme="dark"] .burger, html[data-theme="dark"] .header__signin { border-color: var(--edge); }
+html[data-theme="dark"] .toast { background: #3A2757; color: var(--pine); border: 2px solid var(--edge); box-shadow: 4px 4px 0 var(--sh); }
+html[data-theme="dark"] .chip { border-color: var(--edge); }
+html[data-theme="dark"] .hialert { color: #FFE9A8; }
+html[data-theme="dark"] .btn--ghost { border-color: var(--edge); }
+
+/* ==========================================================================
+   HALAMAN LOGIN (login.html)
+   ========================================================================== */
+.auth { display: grid; place-items: start center; padding-block: clamp(2rem, 6vw, 4.5rem); }
+.auth__card { width: min(100%, 460px); padding: clamp(1.4rem, 4vw, 2.25rem); background: var(--paper); border: 2.5px solid var(--edge); border-radius: var(--r-lg); box-shadow: 6px 6px 0 var(--pink); }
+.auth__card[hidden] { display: none; }
+.auth__card h1 { font-size: var(--text-xl); margin-top: .35rem; }
+.auth__sub { margin-top: .5rem; color: var(--pine-soft); }
+.gbtn { display: flex; align-items: center; justify-content: center; gap: .75rem; width: 100%; margin-top: 1.5rem; min-height: 52px; padding: .7rem 1.2rem; background: var(--paper); color: var(--pine); border: 2.5px solid var(--edge); border-radius: var(--r-pill); box-shadow: 3px 3px 0 var(--sh); font: inherit; font-weight: 600; cursor: pointer; }
+.gbtn svg { width: 22px; height: 22px; flex: none; }
+.gbtn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--sh); }
+.auth__note { margin-top: 1rem; font-size: var(--text-sm); color: var(--pine-mute); }
+.auth__soon { margin-top: 1rem; padding: .75rem 1rem; border: 1px dashed var(--line); border-radius: var(--r-md); font-size: var(--text-sm); color: var(--pine-soft); }
+.auth__soon[hidden] { display: none; }
+.auth__soon code { font-family: var(--font-mono); font-size: .85em; }
+.auth__me { display: flex; align-items: center; gap: 1rem; margin: 1rem 0 1.5rem; }
+.auth__av { width: 64px; height: 64px; font-size: 1.7rem; }
+.auth__card .btn + .btn { margin-top: .6rem; }
+
+/* Tab, form, dan pesan salah di login.html */
+.atabs { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; padding: .3rem; margin-bottom: 1.25rem; background: var(--fog-deep); border-radius: var(--r-pill); }
+.atabs button { min-height: 42px; border: 0; border-radius: var(--r-pill); background: transparent; color: var(--pine-soft); font: inherit; font-weight: 600; cursor: pointer; }
+.atabs button[aria-selected="true"] { background: var(--pink); color: #fff; }
+.aform { display: grid; gap: .9rem; margin-top: 1.25rem; }
+.aform[hidden] { display: none; }
+.afield { display: grid; gap: .35rem; font-size: var(--text-sm); color: var(--pine-soft); font-weight: 500; }
+.afield .input { display: flex; }
+.afield .input input { width: 100%; min-width: 0; }
+.aerr { padding: .65rem .9rem; border: 2px solid #B3261E; border-radius: var(--r-md); background: #FDECEA; color: #8C1D18; font-size: var(--text-sm); font-weight: 500; }
+.aerr[hidden] { display: none; }
+html[data-theme="dark"] .aerr { background: #4A1B1B; color: #FFC9C4; border-color: #E0625A; }
+.adiv { display: flex; align-items: center; gap: .75rem; margin-top: 1.25rem; font-size: var(--text-sm); color: var(--pine-mute); }
+.adiv::before, .adiv::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.aform + .adiv + .gbtn, .adiv + .gbtn { margin-top: 1rem; }
+.header__signin { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.afield .input input.is-invalid { border: 0 !important; box-shadow: none !important; }
+
+/* Footer diringkas di HP (dulu tinggi banget: tulisan raksasa + semua kolom ditumpuk) */
+@media (max-width: 640px) {
+  .footer { padding-top: 1.75rem; }
+  .footer__top { gap: 1.25rem; padding-bottom: 1.25rem; }
+  .footer__title { font-size: var(--text-lg); }
+  .footer__sub { margin-top: .4rem; font-size: var(--text-sm); }
+  .footer__cols { gap: 1.1rem 1rem; }
+  .footer__cols > div:last-child { grid-column: 1 / -1; }
+  .footer__h { margin-bottom: .5rem; }
+  .footer__cols li + li { margin-top: .3rem; }
+  .footer address { line-height: 1.6; }
+  .footer__word { display: none; }
+  .footer__bottom { padding-block: 1rem; font-size: var(--text-xs); }
+}
+
+/* Footer selalu nempel di dasar layar, walau isi halaman pendek (login, "udah masuk", item nggak ketemu) */
+body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+body > main { flex: 1 0 auto; }
+body > .footer { flex: none; }
+
+/* ==========================================================================
+   TAB BAWAH (HP) — Beranda · Chat · Transaksi · Akun
+   Dibikin otomatis oleh market.js (bagian "Tab bawah"), cuma muncul di layar <= 760px.
+   Tab biasa = timbul (bayangan keras). Tab yang lagi dipilih = "nonjok" (masuk ke dalam, bayangan hilang, warna pink).
+   Tab yang dipilih ditentuin dari halaman yang lagi dibuka (lihat TABS di market.js), jadi pindah halaman = tab balik ke
+   semula dan tab halaman baru yang nonjok. Tinggi bar = --tb; footer dikasih ruang segitu biar nggak ketutup.
+   ========================================================================== */
+.tabbar { display: none; }
+@media (max-width: 760px) {
+  :root { --tb: 78px; }
+  .tabbar {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: .55rem;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 55;
+    padding: .6rem .7rem calc(.6rem + env(safe-area-inset-bottom, 0px));
+    background: var(--paper); border-top: 2.5px solid var(--edge);
+  }
+  .tabbar__btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .2rem;
+    min-height: 54px; padding: .35rem .2rem; border-radius: 14px;
+    background: var(--paper); color: var(--pine);
+    border: 2px solid var(--edge); box-shadow: 3px 3px 0 var(--sh);
+    font-size: .72rem; font-weight: 600; line-height: 1; letter-spacing: 0;
+    -webkit-tap-highlight-color: transparent; user-select: none;
+    transition: transform 140ms cubic-bezier(.3, 1.6, .5, 1), box-shadow 140ms ease, background-color 140ms ease, color 140ms ease;
+  }
+  .tabbar__btn svg { width: 22px; height: 22px; display: block; }
+  .tabbar__btn:active,
+  .tabbar__btn[aria-current="page"] {
+    transform: translate(3px, 3px); box-shadow: 0 0 0 var(--sh), inset 2px 2px 0 rgba(0, 0, 0, .28);
+  }
+  .tabbar__btn[aria-current="page"] { background: var(--pink); color: #fff; }
+  /* ruang di dasar halaman biar footer & isi nggak ketutup bar */
+  .footer { padding-bottom: var(--tb); }
+  /* beranda: di bagian hero (paling atas) tab disembunyiin, muncul pas di-scroll (kelas is-away diatur market.js) */
+  .tabbar { transition: transform 260ms cubic-bezier(.3, 1.2, .5, 1); }
+  .tabbar.is-away { transform: translateY(105%); pointer-events: none; }
+  .tb-off .toast { bottom: 1.5rem; }
+  .toast { bottom: calc(var(--tb) + 1rem + env(safe-area-inset-bottom, 0px)); }
+}

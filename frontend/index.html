@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>/* tema: default terang, gelap kalau user pernah milih */
+try{var t=localStorage.getItem("am-theme");if(t==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<title>adopt.mart — Jual beli item</title>
+<meta name="description" content="Marketplace item kecil-kecilan, bayar QRIS langsung ke penjual." />
+<meta name="theme-color" content="#101412" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23101412'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' font-weight='700' fill='%23D5E4E1' font-family='sans-serif'%3Ea%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=SUSE:wght@400;500;600&family=Golos+Text:wght@400;500;600&family=Ubuntu+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/site.css" />
+<link rel="stylesheet" href="assets/css/market.css" />
+<script>/* animasi masuk: aktif kecuali pengguna minta "kurangi gerakan"; kalau motion.js gagal dimuat, disembunyiin-nya dicabut lagi setelah 3 dtk */
+(function(d){if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("js");setTimeout(function(){if(!d.classList.contains("motion-ready"))d.classList.remove("js")},3000)})(document.documentElement);</script>
+</head>
+<body>
+<a class="skip" href="#main">Lompat ke konten</a>
+
+<header class="header" data-header="solid">
+  <div class="container header__inner">
+    <a class="brand" href="index.html" aria-label="adopt.mart — beranda">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M9 12h14l-1.6 9.5a2 2 0 0 1-2 1.7h-6.8a2 2 0 0 1-2-1.7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        <path d="M12.5 12a3.5 3.5 0 0 1 7 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <span class="brand__word">adopt.mart</span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Utama">
+      <a href="index.html" aria-current="page">Beranda</a>
+      <a href="items.html">Jelajah item</a>
+      <a href="#" data-soon="Halaman jual item belum dibuat.">Jual item</a>
+      <a class="nav__signin-mobile" href="login.html">Masuk</a>
+    </nav>
+    <div class="header__tools">
+      <a class="btn header__signin" href="login.html">Masuk</a>
+      <button class="themebtn" type="button" data-theme-toggle aria-label="Ganti tema terang/gelap" aria-pressed="false"><svg class="themebtn__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="themebtn__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Buka menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="container mhero">
+<!-- GAMBAR HERO: taruh file gambar di assets/img/hero.jpg — dia jadi latar, teks di atasnya -->
+<div class="mhero__card">
+<div class="mhero__pic" aria-hidden="true"></div>
+<div class="mhero__text">
+  <p class="label">Marketplace item · penjual terpercaya</p>
+  <h1>Cari item, bayar aman.</h1>
+  <p class="lead">Pet, item, akun, dan voucher dari penjual yang udah dikenal. Bayar lewat QRIS, item dikirim, lu konfirmasi.</p>
+  <form class="msearch" action="items.html" method="get" role="search">
+    <label class="input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="sr-only">Cari item</span><input type="search" name="q" placeholder="Cari item, misal: naga, neon, akun" /></label>
+    <button class="btn btn--dark" type="submit">Cari</button>
+  </form>
+  <p class="mtrust"><span>Bayar QRIS penjual</span><span>Konfirmasi maks 1 hari</span><span>Penjual terseleksi</span></p>
+</div>
+</div>
+</section>
+
+<section class="container section sec-cat">
+  <div class="shead shead--split"><h2>Mau cari apa?</h2><a class="link-arrow" href="items.html">Semua item <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+  <div class="catgrid"><a class="cat" href="items.html?cat=pet"><svg class="cat__ico" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 12.5c-2.6 0-5 2.6-5 5 0 1.6 1.2 2.5 2.6 2.5 1 0 1.5-.5 2.4-.5s1.4.5 2.4.5c1.4 0 2.6-.9 2.6-2.5 0-2.4-2.4-5-5-5z"/><circle cx="5" cy="10" r="1.9"/><circle cx="9" cy="5.8" r="2"/><circle cx="15" cy="5.8" r="2"/><circle cx="19" cy="10" r="1.9"/></svg><span class="cat__name">Pet</span><span class="cat__desc">Hewan &amp; karakter</span><span class="cat__count" data-cat-count="pet"></span></a><a class="cat" href="items.html?cat=item"><svg class="cat__ico" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="9.5" width="17" height="11" rx="2"/><rect x="2.5" y="6.5" width="19" height="3.8" rx="1.5"/><path d="M12 6.5v14"/><path d="M12 6.5C10 3 6.5 3.4 7 5.6c.4 1.3 3 .9 5 .9zM12 6.5c2-3.5 5.5-3.1 5-.9-.4 1.3-3 .9-5 .9z"/></svg><span class="cat__name">Item</span><span class="cat__desc">Barang &amp; aksesori</span><span class="cat__count" data-cat-count="item"></span></a><a class="cat" href="items.html?cat=akun"><svg class="cat__ico" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10.8" r="2.2"/><path d="M5.6 16.3c.7-1.6 1.9-2.4 3.4-2.4s2.7.8 3.4 2.4"/><path d="M14.5 10h4M14.5 13.5h3"/></svg><span class="cat__name">Akun</span><span class="cat__desc">Akun siap pakai</span><span class="cat__count" data-cat-count="akun"></span></a><a class="cat" href="items.html?cat=lainnya"><svg class="cat__ico" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M11 2.8l2.3 5.9 5.9 2.3-5.9 2.3L11 19.2l-2.3-5.9L2.8 11l5.9-2.3z"/><path d="M19 15.5l.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7z"/></svg><span class="cat__name">Lainnya</span><span class="cat__desc">Voucher &amp; jasa</span><span class="cat__count" data-cat-count="lainnya"></span></a></div>
+</section>
+
+<section class="container section">
+  <div class="shead shead--split"><h2>Item populer</h2><a class="link-arrow" href="items.html">Lihat semua <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+  <div class="tgrid" data-home-grid></div>
+</section>
+
+<section class="container section" style="padding-top:0">
+  <div class="stepsbg">
+  <div class="shead"><p class="label">Cara belanja</p><h2>Tiga langkah doang</h2></div>
+  <div class="steps3">
+    <div class="step3"><h3>Pilih item</h3><p>Cari lewat kategori atau kolom cari, cek stok dan penjualnya.</p></div>
+    <div class="step3"><h3>Bayar QRIS</h3><p>Scan QRIS penjual, nominal udah terisi. Uang langsung ke penjual.</p></div>
+    <div class="step3"><h3>Terima &amp; konfirmasi</h3><p>Item dikirim lewat trade. Kalau udah masuk, lu tekan konfirmasi.</p></div>
+  </div>
+  </div>
+</section>
+
+<section class="container" style="padding-bottom:var(--section)">
+  <div class="sellcta">
+    <div><h2>Punya item buat dijual?</h2><p>Penjual dipilih manual biar pembeli aman. Hubungi admin buat daftar.</p></div>
+    <a class="btn btn--glacier" href="#" data-soon="Halaman jual item belum dibuat.">Daftar jadi penjual</a>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__lead">
+        <p class="footer__title">Jual-beli item, langsung dari penjual terpercaya.</p>
+        <p class="footer__sub">Bayar lewat QRIS penjual, konfirmasi setelah item masuk. Penjual cuma yang udah dikenal.</p>
+      </div>
+      <div class="footer__cols">
+        <div><p class="label footer__h">Jelajah</p><ul>
+          <li><a href="items.html">Semua item</a></li>
+          <li><a href="items.html?cat=pet">Pet</a></li>
+          <li><a href="items.html?cat=item">Item</a></li>
+          <li><a href="items.html?cat=akun">Akun</a></li></ul></div>
+        <div><p class="label footer__h">Bantuan</p><ul>
+          <li><a href="#" data-soon="Belum dibuat.">Cara beli</a></li>
+          <li><a href="#" data-soon="Belum dibuat.">Jadi penjual</a></li>
+          <li><a href="#" data-soon="Belum dibuat.">Sengketa</a></li></ul></div>
+        <div><p class="label footer__h">Kontak</p><address>Isi kontak lu di sini<br />IG / WA / email</address></div>
+      </div>
+    </div>
+    <p class="footer__word" aria-hidden="true">adopt.mart</p>
+    <div class="footer__bottom">
+      <p>&copy; <span data-year>2026</span> adopt.mart. Tampilan dari template Fjelvik (html.design).</p>
+    </div>
+  </div>
+</footer>
+<div class="toast" role="status" aria-live="polite" hidden></div>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/data.js" defer></script>
+<script src="assets/js/market.js" defer></script>
+<script src="assets/js/motion.js" defer></script>
+</body>
+</html>
